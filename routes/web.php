@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Route::get('hello',function(){
     return "Hello word";
@@ -33,8 +33,86 @@ Route::match(['get','post'],'apple/macbook',function(){
 
 Route::any('sony/sonyz', function(){
     //return "Sony Experia Z";
-    //return Redirect('sam-sung/galaxys');
     return redirect()->route('samsung');
 });
 
 Route::view('/view','welcome');
+
+// truyen tham so bat buoc vao routing
+Route::get('book/{name}/{id}',function($nameBook, $id){
+    return $nameBook .'---'. $id;
+})->where(['name'=>'[A-Za-z]+','id'=>'[0-9]+']);
+
+// truyen tham so khong bat buoc vao routing
+Route::get('phim-truyen/{name?}/{id?}', function($name = null, $id = null){
+    return $name .'---'. $id;
+})->where(['name'=>'[A-Za-z]+','id'=>'[0-9]+']);
+
+Route::get('football',function(){
+    return "Phap";
+})->name('wordcup');
+
+Route::redirect('hello','football',301);
+Route::get('watch-football',function(){
+    //return redirect()->route('wordcup');
+    return redirect('football');
+});
+
+
+
+Route::group([
+    'prefix' => 'admin',
+    'as' => 'admin.'
+],
+function(){
+    Route::get('home',function(){
+    return "Admin - Home";
+    })->name('home');
+    Route::get('product',function(){
+        return "Admin - Product";
+    })->name('product');
+});
+
+Route::get('login',function(){
+    //return redirect()->route('admin.home');
+    //$route = Route::current();
+    // die + var_dump
+    //dd($route);
+    //$name = Route::currentRouteName();
+    //dd($name);
+    $action = Route::currentRouteAction();
+    dd($action);
+})->name('login');
+
+// Route::domain('kpop.myweb.com')->group(function(){
+//     Route::get('user/{id}', function ($id) {
+//         return "Sub-domain {$account} - {$id}";
+//     });
+// });
+
+
+
+Route::group([
+    'middleware' => ['check_age:admin','web']
+],function(){
+    Route::get('watch-film/{age}',function($ages){
+        return "OKie - bank dc xem";
+    });
+
+    Route::get('shopping/{age}',function($ages){
+        return "OKie - ban duoc mua hang";
+    });
+});
+
+
+
+Route::group([
+    'namespace' => 'Backend'
+],function(){
+    Route::get('dashboard','DashboardController@index')->name('dashboard');
+
+    Route::get('demo/{id}','DashboardController@demo')->name('demo');
+});
+
+
+Route::get('test','TestController@show')->name('test');
