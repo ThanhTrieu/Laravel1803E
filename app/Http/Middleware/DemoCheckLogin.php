@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class CheckAge
+class DemoCheckLogin
 {
     /**
      * Handle an incoming request.
@@ -13,17 +13,11 @@ class CheckAge
      * @param  \Closure  $next
      * @return mixed
      */
-
     public function handle($request, Closure $next, $params = null)
     {
-        $response = $next($request);
-
-        if($request->age < 18) {
-            return redirect()->route('wordcup');
-        } elseif($params !== 'admin'){
-            return redirect()->route('wordcup');
+        if($params !== 'admin'){
+            return redirect()->route('login');
         }
-        return $response;
-        //return $next($request);
+        return $next($request);
     }
 }

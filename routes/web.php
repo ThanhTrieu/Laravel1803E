@@ -12,7 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    //return view('welcome');
+    return "AAAA";
 })->name('welcome');
 
 Route::get('hello',function(){
@@ -104,15 +105,23 @@ Route::group([
     });
 });
 
-
-
 Route::group([
-    'namespace' => 'Backend'
+    'namespace' => 'Backend',
+    'as' => 'admin.',
+    'prefix' => 'admin'
 ],function(){
     Route::get('dashboard','DashboardController@index')->name('dashboard');
 
     Route::get('demo/{id}','DashboardController@demo')->name('demo');
+    Route::get('login','LoginController@login')->name('showForm');
+    Route::post('hanlde-login','LoginController@handleLogin')->name('hanldeLogin');
+
+    Route::post('sum-number','DashboardController@sum')->name('sum');
 });
 
-
 Route::get('test','TestController@show')->name('test');
+Route::get('demo','TestController@check')->name('check');
+
+route::get('login',function(){
+    return "ban hay login";
+})->name('login');
