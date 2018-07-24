@@ -4,11 +4,15 @@ namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
     public function index()
     {
+        $admin = DB::table('admins')->get()->toArray();
+        dd($admin);
+
         // truyen du lieu ra view
         $data = [];
         $data['lstInfoST'] = [
