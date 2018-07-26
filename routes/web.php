@@ -29,5 +29,8 @@ Route::group([
     Route::post('hanlde-login','LoginController@handleLogin')->name('hanldeLogin');
 
     Route::post('sum-number','DashboardController@sum')->name('sum');
+
+    Route::get('orm','DashboardController@orm')->name('orm');
+    Route::get('join','DashboardController@join')->name('join');
 });
 
