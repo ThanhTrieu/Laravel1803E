@@ -16,4 +16,9 @@ class Product extends Model
     {
         return $this->belongsTo('App\Models\Categorie');
     }
+
+    public function test()
+    {
+        return Product::all();
+    }
 }
