@@ -44,5 +44,7 @@ Route::group([
     Route::get('product','ProductController@index')->name('product');
     Route::get('add-product','ProductController@add')->name('addproduct');
     Route::post('add','ProductController@handleadd')->name('product.handleadd');
+    Route::post('delete','ProductController@delete')->name('product.delete');
+    Route::get('produtc-detail/{id}','ProductController@detail')->name('product.detail');
 });
 

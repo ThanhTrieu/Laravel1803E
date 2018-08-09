@@ -1,6 +1,19 @@
 @extends('admin.layout')
 
 @section('content')
+    <div class="row">
+        <div class="col-lg-12">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+        </div>
+    </div>
     <form action="{{ route('admin.product.handleadd') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="row">
@@ -12,15 +25,18 @@
                 <div class="form-group">
                     <label for="slcCat">Categories</label>
                     <select  class="form-control" id="slcCat" name="cat_id">
-                        <option value="1">Thoi Trang Cong So</option>
-                        <option value="2">Thoi Trang Cong So</option>
+                        @foreach ($categories as $cat)
+                            <option value="{{ $cat->id }}"> {{ $cat->namecat }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="slcSize">Sizes</label>
                     <select class="form-control" id="slcSize" name="size_id">
-                        <option value="1">M</option>
-                        <option value="2">XL</option>
+                        @foreach ($sizes as $size)
+                            <option value="{{ $size->id }}">{{ $size->namesize }}</option>
+                        @endforeach
+
                     </select>
                 </div>
                 <div class="form-group">

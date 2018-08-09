@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>SB Admin - Dashboard</title>
 
@@ -20,7 +21,16 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('css/admin/sb-admin.css') }}" rel="stylesheet">
-
+    <script src="{{ asset('css/admin/vendor/jquery/jquery.min.js') }}"></script>
+    <script type="text/javascript">
+        $(function(){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+        });
+    </script>
   </head>
 
   <body id="page-top">
@@ -170,7 +180,7 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="{{ asset('css/admin/vendor/jquery/jquery.min.js') }}"></script>
+
     <script src=" {{ asset('css/admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }} "></script>
 
     <!-- Core plugin JavaScript-->
