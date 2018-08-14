@@ -11,10 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    //return view('welcome');
-    return "AAAA";
-})->name('welcome');
+Route::get('/','ProductController@index')->name('product.index');
+Route::get('add-cart/{id}', 'CartController@add')->name('addcart');
+Route::get('cart','CartController@showCart')->name('show.cart');
+Route::get('delete-cart/{id}','CartController@delete')->name('cart.delete');
+Route::get('destroy-cart','CartController@remove')->name('cart.removeall');
+Route::post('update-cart','CartController@update')->name('cart.update');
 
 Route::group([
     'namespace' => 'Backend',
