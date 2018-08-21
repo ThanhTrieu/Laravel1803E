@@ -16,3 +16,8 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::resource('photo','API\PhotoController');
+//Route::resource('photo/delete','API\PhotoController');
+Route::resource('photo/action','API\PhotoController');
+// Route::resource('photo','API\PhotoController');
