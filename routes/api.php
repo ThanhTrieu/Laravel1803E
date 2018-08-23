@@ -20,4 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('photo','API\PhotoController');
 //Route::resource('photo/delete','API\PhotoController');
 Route::resource('photo/action','API\PhotoController');
-// Route::resource('photo','API\PhotoController');
+Route::resource('user','API\UsersController');
+Route::resource('user/delete','API\UsersController');
